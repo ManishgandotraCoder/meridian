@@ -6,6 +6,8 @@ A usage service for Meridian Life Sciences, and the connector that lets a team l
 
 The note for team leads is [docs/note-to-team-leads.md](docs/note-to-team-leads.md). The tool transcript is [docs/transcript.md](docs/transcript.md).
 
+**Loom:** paste the URL here after you record it. What to cover, and in what order, is [docs/loom.md](docs/loom.md).
+
 ## Setup
 
 Python 3.9 or newer, and Node 22.
