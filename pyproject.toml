@@ -1,0 +1,10 @@
+[project]
+name = "meridian-usage"
+version = "1.0.0"
+description = "Meridian Life Sciences usage and capability service"
+requires-python = ">=3.9"
+readme = "README.md"
+
+[tool.pytest.ini_options]
+testpaths = ["service/tests", "provision/tests"]
+pythonpath = ["service", "."]

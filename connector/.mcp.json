@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "meridian-usage": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/dist/index.js"],
+      "env": {
+        "MERIDIAN_ACTOR_USER_ID": "${user_config.actor_user_id}",
+        "MERIDIAN_ENV": "${user_config.environment}",
+        "MERIDIAN_API_URL": "${user_config.api_url}",
+        "MERIDIAN_ROOT": "${CLAUDE_PROJECT_DIR}"
+      }
+    }
+  }
+}

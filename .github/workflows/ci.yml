@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+      - name: Python tests
+        run: pytest -q
+        env:
+          PYTHONPATH: service:.
+      - name: Connector tests and build
+        working-directory: connector
+        run: npm ci && npm test && npm run build
+      - name: Provision dev, staging, and prod
+        run: python -m provision
+        env:
+          PYTHONPATH: service:.

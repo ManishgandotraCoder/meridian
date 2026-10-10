@@ -1,0 +1,25 @@
+{
+  "name": "meridian-usage-connector",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP connector for Meridian usage, scoped to the caller's group and role.",
+  "bin": {
+    "meridian-usage": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "tsx --test test/*.test.ts",
+    "transcript": "tsx scripts/transcript.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.2",
+    "yaml": "^2.8.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

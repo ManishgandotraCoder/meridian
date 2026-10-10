@@ -1,0 +1,11 @@
+.venv/
+connector/.env
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/
+connector/dist/
+build/
+var/
+*.db
+.DS_Store

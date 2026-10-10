@@ -1,0 +1,36 @@
+{
+  "name": "meridian-usage",
+  "version": "1.0.0",
+  "description": "Usage, cost, and capability controls for the Meridian assistant, scoped to the signed-in person's group and role.",
+  "contextFileName": "GEMINI.md",
+  "settings": [
+    {
+      "name": "Directory user id",
+      "description": "The directory user this session acts as. Fixed for the process. Priya Nair, team lead of Clinical Operations, is user_E7691888F28227066DD2FB86.",
+      "envVar": "MERIDIAN_ACTOR_USER_ID"
+    },
+    {
+      "name": "Environment",
+      "description": "dev, staging, or prod. Must match MERIDIAN_ENV on the usage service. Leave blank for prod.",
+      "envVar": "MERIDIAN_ENV"
+    },
+    {
+      "name": "Usage service URL",
+      "description": "Base URL of the Meridian usage service. Leave blank for http://127.0.0.1:8000.",
+      "envVar": "MERIDIAN_API_URL"
+    }
+  ],
+  "mcpServers": {
+    "meridian-usage": {
+      "command": "node",
+      "args": ["${extensionPath}${/}dist${/}index.js"],
+      "cwd": "${extensionPath}",
+      "env": {
+        "MERIDIAN_ACTOR_USER_ID": "${MERIDIAN_ACTOR_USER_ID}",
+        "MERIDIAN_ENV": "${MERIDIAN_ENV:-prod}",
+        "MERIDIAN_API_URL": "${MERIDIAN_API_URL:-http://127.0.0.1:8000}",
+        "MERIDIAN_ROOT": "${workspacePath}"
+      }
+    }
+  }
+}

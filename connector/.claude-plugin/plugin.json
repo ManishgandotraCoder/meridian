@@ -1,0 +1,29 @@
+{
+  "name": "meridian-usage",
+  "displayName": "Meridian usage",
+  "version": "1.0.0",
+  "description": "Usage, cost, and capability controls for the Meridian assistant. Answers are scoped to the signed-in person's group and role.",
+  "author": {
+    "name": "Meridian Life Sciences, IT Platform"
+  },
+  "userConfig": {
+    "actor_user_id": {
+      "type": "string",
+      "title": "Directory user id",
+      "description": "The directory user this session acts as. Fixed for the process. Priya Nair, team lead of Clinical Operations, is user_E7691888F28227066DD2FB86.",
+      "required": true
+    },
+    "environment": {
+      "type": "string",
+      "title": "Environment",
+      "description": "dev, staging, or prod. Must match MERIDIAN_ENV on the usage service. dev lets members read every group. staging and prod limit a team lead to their own group. Only prod limits capability changes to platform admins.",
+      "default": "prod"
+    },
+    "api_url": {
+      "type": "string",
+      "title": "Usage service URL",
+      "description": "Base URL of the Meridian usage service.",
+      "default": "http://127.0.0.1:8000"
+    }
+  }
+}

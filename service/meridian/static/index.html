@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overview · Meridian usage</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">M</div>
+        <div>
+          <div class="brand-name">Meridian</div>
+          <div class="brand-sub">Life Sciences</div>
+        </div>
+      </div>
+      <nav aria-label="Sections">
+        <p class="nav-label">Reports</p>
+        <button class="nav-btn active" type="button" data-view="overview" aria-current="page">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="2" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="10" y="2" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="2" y="10" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/><rect x="10" y="10" width="6" height="6" rx="1.4" stroke="currentColor" stroke-width="1.6"/></svg>
+          Overview
+        </button>
+        <button class="nav-btn" type="button" data-view="platforms">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 12.5 9 15.5 15 12.5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 9 9 12 15 9" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 5.5 9 2.5 15 5.5 9 8.5 3 5.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Platforms
+        </button>
+        <button class="nav-btn" type="button" data-view="groups">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="6.5" cy="6" r="2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="7" r="1.8" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 14.5c.6-2.2 2.2-3.3 4-3.3s3.4 1.1 4 3.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10.5 11.4c1.3-.2 2.5.3 3.2 1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Groups
+        </button>
+        <button class="nav-btn" type="button" data-view="weeks">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2.5" y="3.5" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2.5 7.5h13M6 2.5v2M12 2.5v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Weeks
+        </button>
+        <button class="nav-btn" type="button" data-view="detail">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 4.5h12M3 9h12M3 13.5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          Breakdown
+        </button>
+        <p class="nav-label">Administration</p>
+        <button class="nav-btn" type="button" data-view="capabilities">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="5" width="14" height="8" rx="4" stroke="currentColor" stroke-width="1.6"/><circle cx="11.5" cy="9" r="1.7" fill="currentColor"/></svg>
+          Capabilities
+        </button>
+      </nav>
+      <div class="side-foot" id="foot"></div>
+    </aside>
+
+    <div class="workspace">
+      <div class="chrome">
+        <header class="topbar">
+          <div>
+            <p class="kicker" id="view-kicker">Reports</p>
+            <h1 id="view-heading">Overview</h1>
+            <p class="lead" id="view-lead">Tokens, cost, and the shape of usage for this identity.</p>
+          </div>
+          <label class="who">
+            <span><span class="who-label">Viewing as</span><span class="who-hint">Simulated identity</span></span>
+            <select id="user"></select>
+          </label>
+        </header>
+        <div class="filterbar">
+          <span class="filter-label">Filters</span>
+          <label class="field">Group <select id="group"></select></label>
+          <label class="field">Week <select id="week"></select></label>
+        </div>
+      </div>
+
+      <main class="content">
+        <div id="banner" class="banner" role="status">
+          <p class="banner-text">Choose a person to load their view.</p>
+        </div>
+
+        <section class="view" data-view="overview">
+          <div class="kpis">
+            <div class="kpi"><span>Tokens</span><strong id="tokens">—</strong><em>Input and output, current filters</em></div>
+            <div class="kpi"><span>Cost</span><strong id="cost">—</strong><em>USD across both platforms</em></div>
+            <div class="kpi"><span>Claude requests</span><strong id="requests">—</strong><em>Gemini does not report requests</em></div>
+          </div>
+          <div class="split">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Weekly trend</h2>
+                  <p>Token volume by ISO week in this view.</p>
+                </div>
+              </div>
+              <div class="bar-list" id="week-chart"></div>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Platform mix</h2>
+                  <p>Share of tokens, with cost beside it.</p>
+                </div>
+              </div>
+              <div class="bar-list" id="platform-mix"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" data-view="platforms" hidden>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>By platform</h2>
+                <p>Claude and Gemini for the group and week selected above.</p>
+              </div>
+              <span class="count" id="platforms-count"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Platform</th><th class="num">Input</th><th class="num">Output</th><th class="num">Total</th><th class="num">Cost</th></tr></thead>
+                <tbody id="platforms"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" data-view="groups" hidden>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>By group</h2>
+                <p>Directory groups this role is allowed to see.</p>
+              </div>
+              <span class="count" id="groups-count"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Group</th><th class="num">Tokens</th><th class="num">Cost</th></tr></thead>
+                <tbody id="groups"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" data-view="weeks" hidden>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>By week</h2>
+                <p>ISO weeks in the export window. A week filter narrows this list to one row.</p>
+              </div>
+              <span class="count" id="weeks-count"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Week</th><th class="num">Tokens</th><th class="num">Cost</th></tr></thead>
+                <tbody id="weeks"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" data-view="detail" hidden>
+          <article class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Week, group, and platform</h2>
+                <p>One line for each combination in the current filters.</p>
+              </div>
+              <span class="count" id="rows-count"></span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th>Week</th><th>Group</th><th>Platform</th><th class="num">Tokens</th><th class="num">Cost</th></tr></thead>
+                <tbody id="rows"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <section class="view" data-view="capabilities" hidden>
+          <p class="cap-note" id="cap-note"></p>
+          <div class="cap-grid" id="caps"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
